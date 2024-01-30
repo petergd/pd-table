@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>HTML5 Test Page</title>
+		<meta name="description" content="HTML5 Custom Web Element Test Page">
+		<meta name="author" content="Peter Darmis">
+		<link rel="modulepreload" href="pd-table.js" as="script">
+		<link rel="preload" href="generated5.json" as="fetch" crossorigin>
+		<style>
+			body {
+			  font-family: system-ui;
+			  height: 100%;
+			  background-color: #fff;
+			  display: flex;
+			  flex-direction:column;
+			  align-items:center;
+			  justify-content:center;
+			  align-content: center;
+			}
+			:host {
+				display: block;
+			}
+			pd-table {
+				display: block;
+				width: 100%;
+				align-self: center;
+			}
+		</style>
+	</head>
+	<body>			
+		<pd-table></pd-table>
+		<script type="module" src="pd-table.js" async></script>
+		<script type="text/javascript" async>
+			window.addEventListener("load", async (event) => {
+				let response = await fetch("generated5.json");			
+				let pdTable = document.querySelector('pd-table');
+				let data = await response.text();
+				await pdTable.setAttribute('table-data', data);
+			});
+		</script>
+	</body>
+</html>
