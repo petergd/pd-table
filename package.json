@@ -1,0 +1,32 @@
+{
+  "name": "pd-table",
+  "version": "1.0.0",
+  "description": "Custom Web Element used to create a sortable, filterable and paginated table by provided data source.",
+  "main": "pd-table.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petergd/pd-table.git"
+  },
+  "keywords": [
+    "table",
+    "sortable",
+    "filter",
+    "pagination",
+    "elements"
+  ],
+  "bugs": {
+    "url": "https://github.com/petergd/pd-table.git/issues",
+    "email": "11849215+petergd@users.noreply.github.com"
+  },
+  "files": [
+    "pd-table.js",
+    "index.html"
+  ],
+  "author": "Peter Darmis",
+  "license": "MIT",
+  "devDependencies": {},
+  "homepage": "https://github.com/petergd/pd-table#readme"
+}
