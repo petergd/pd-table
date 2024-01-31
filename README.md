@@ -5,7 +5,7 @@ paginated table that can export the filtered table as CSV.
 `Data source format is JSON.`
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/pd-table)
 
-[Demo page (by unpkg.com)](https://unpkg.com/pd-table@1.0.0/pd-table.html)
+[Demo page (by unpkg.com)](https://unpkg.com/pd-table@1.0.1/index.html)
 
 ## Getting Started
 

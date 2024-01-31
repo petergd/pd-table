@@ -1,6 +1,6 @@
 {
   "name": "pd-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Custom Web Element used to create a sortable, filterable and paginated table by provided data source.",
   "main": "pd-table.js",
   "scripts": {
@@ -23,7 +23,13 @@
   },
   "files": [
     "pd-table.js",
-    "index.html"
+    "index.html",
+	"generated.json",
+	"generated1.json",
+	"generated2.json",
+	"generated3.json",
+	"generated4.json",
+	"generated5.json"
   ],
   "author": "Peter Darmis",
   "license": "MIT",
