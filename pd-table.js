@@ -47,10 +47,11 @@ export class pdTable extends HTMLElement {
     this.#exportButtonLabel = !this.#isEmpty(exportButtonLabel) ? exportButtonLabel.replace(/(<([^>]+)>)/gi, '') : 'Export';
 	window.performance.mark('Module initialized');
   }
+  
   #setStyle() {
     let Style = document.createElement('style');
     this.#css = `:host {
-		--main-color: hsl(250, 100%, 11%);
+		--main-color: hsl(190, 41%, 33%);
 		--odd: hsl(255, 100%, 97%);
 		--even: hsl(255, 100%, 100%);
 		--hover: hsl(128, 25%, 85%);
@@ -105,16 +106,19 @@ export class pdTable extends HTMLElement {
 		margin-left: 0;
 	}
 	.searchable > button.btn {
-		float: right;
-		color: var(--main-color);
+		position: fixed;
+		right: 0;
+		top: 0;
+		background-color: var(--main-color);
 		height: 3vmax;
+		margin: 1vh 1vw;
 		text-align: center;
 		border-radius: 0.25em;
 		border: solid 0.01em var(--main-color);
 		cursor: pointer;
 		padding: 0.5em;
 		font-size: min(1.5vmin, 1.5rem);
-		background-color: var(--even);
+		color: var(--even);
 	}
 	.rsdisplay {
 		width: 10%;
@@ -204,7 +208,7 @@ export class pdTable extends HTMLElement {
 	.cell {
 		padding: 0.375rem 0.75rem;
 		display: table-cell;
-		font-size: 0.875rem;
+		font-size: 2vh;
 		line-height: 2.5vh;
 		text-align: center;
 		font-weight: 300;
@@ -307,11 +311,11 @@ export class pdTable extends HTMLElement {
 	  87% {
 		box-shadow: .2em -.2em 0 0 #FF3D00;
 	  }
-	}
-`;
+	}`;
     Style.append(this.#css);
     this.sRoot.prepend(Style);
   }
+  
   #createRow(rowData, isHeader = false) {
     let row = document.createElement('div');
     row.classList.add('row');
@@ -332,6 +336,7 @@ export class pdTable extends HTMLElement {
     }
     return row;
   }
+  
   #toggleHeaders(tableId) {
 	  let headers = this.sRoot.querySelectorAll('.row.header .cell');
 	  let loader = this.sRoot.querySelector('.loader');
@@ -378,6 +383,7 @@ export class pdTable extends HTMLElement {
 		  });
       });
   }
+  
   #createCell(cellValue, cellTitle = '', isHeader, dataIndexId) {
     let cell = document.createElement('div');
     cell.classList.add('cell');
@@ -390,6 +396,7 @@ export class pdTable extends HTMLElement {
     }
     return cell;
   }
+  
   #createSearch(tableId) {
     let search = document.createElement('div');
     search.classList.add('searchable');
@@ -663,13 +670,23 @@ export class pdTable extends HTMLElement {
 		this.#filtered = this.#filtered.sort((obj1, obj2) => {
 			a = obj1[x.name];
 			b = obj2[x.name];
+			if(['undefined', null].includes(a)) {
+				a = ''+0;
+			}
+			if(['undefined', null].includes(b)) {
+				b = ''+0;
+			}
 			if(!['undefined', null].includes(a) && !['undefined', null].includes(b)) {
 				if(x.direction == 1) {
 					if(this.#isDate(a)) {
 						return new Date(a).getTime() - new Date(b).getTime();
 					}
 					if(typeof a === 'string') {
-						return a.localeCompare(b);
+						if(isNaN(a)) {
+							return a.localeCompare(b);
+						} else {
+							return Number(a) - Number(b);
+						}
 					}
 					if(typeof a === 'number') {
 						return a - b;
@@ -680,7 +697,11 @@ export class pdTable extends HTMLElement {
 						return new Date(b).getTime() - new Date(a).getTime();
 					}
 					if(typeof a === 'string') {
-						return b.localeCompare(a);
+						if(isNaN(a)) {
+							return b.localeCompare(a);
+						} else {
+							return Number(b) - Number(a);
+						}
 					}
 					if(typeof a === 'number') {
 						return b - a;

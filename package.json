@@ -1,6 +1,6 @@
 {
   "name": "pd-table",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Custom Web Element used to create a sortable, filterable and paginated table by provided data source.",
   "main": "pd-table.js",
   "scripts": {
