@@ -7,7 +7,7 @@
 		<meta name="description" content="HTML5 Custom Web Element Test Page">
 		<meta name="author" content="Peter Darmis">
 		<link rel="modulepreload" href="pd-table.js" as="script">
-		<link rel="preload" href="generated5.json" as="fetch" crossorigin>
+		<link rel="preload" href="generated4.json" as="fetch" crossorigin>
 		<style>
 			body {
 			  font-family: system-ui;
@@ -29,15 +29,15 @@
 			}
 		</style>
 	</head>
-	<body>			
-		<pd-table></pd-table>
+	<body>
 		<script type="module" src="pd-table.js" async></script>
-		<script type="text/javascript" async>
-			window.addEventListener("load", async (event) => {
-				let response = await fetch("generated5.json");			
-				let pdTable = document.querySelector('pd-table');
+		<script type="text/javascript" async defer>
+			window.addEventListener("DOMContentLoaded", async (event) => {
+				let response = await fetch("generated4.json");	
 				let data = await response.text();
-				await pdTable.setAttribute('table-data', data);
+				let pdTable = document.createElement("pd-table");
+				pdTable.setAttribute('table-data', data);
+				document.body.prepend(pdTable);
 			});
 		</script>
 	</body>
